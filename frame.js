@@ -1,3 +1,4 @@
+//THIS IS A P5.JS FILE!!!
 function setup() {
   createCanvas(600, 800);
   ball = createVector(width / 2, height / 2);
