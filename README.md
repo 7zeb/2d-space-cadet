@@ -7,5 +7,8 @@ The Github Repo will get slower updates since I'm using CodeHS as my IDE to see 
 ### Developers
 - 7Zeb (https://7zeb.github.io, https://youtube.com/@7zeb)
 
+### Open-Source
+This project is open-source and open to contributers, hey! If you can help me out, please do so by making a pull-request, your help is appreciated.
+![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
 
 ### Last Updated: July 28, 2025
