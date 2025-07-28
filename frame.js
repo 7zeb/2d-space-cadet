@@ -4,26 +4,47 @@
 //Global Variables
 let leftFlipperAngle = 30;    //tilted down
 let rightFlipperAngle = 30;  //tilted down
+let ballX;
+let ballY;
+let ballRadius = 20;
+let ballLaunched = false; //tells the game that the ball is not launched from the start of the game.
 
 
 function setup() {
   createCanvas(600, 800);
+  ballX = width / 2;
+  ballY = height - 50;
   ball = createVector(width / 2, height / 2);
-  velocity = createVector(2, -3);
+  let velocity = createVector(0, 0); //keeps the ball parked until the spacebar is pressed
 } 
 
 function draw() {
-    background(20);
+    background(8, 67, 138); //blue colour for background
     fill(156, 151, 140); //set ball colour to a gray-ish
     ellipse(ball.x, ball.y, 20); //draws the ball
     //ball.x and ball.y are both variables
     
-    //update the balls position
+    //The IF statement makes it so that the ball will only move if ballLaunched is set to true
+    if (ballLaunched) {
     ball.add(velocity);
+  }
 
     //Bounce off walls
-     if (ball.x <= 0 || ball.x >= width) velocity.x *= -1;
-     if (ball.y <= 0 || ball.y >= height) velocity.y *= -1;
+     if (ball.x <= ballRadius) {
+  ball.x = ballRadius;        //Clamp position
+  velocity.x = abs(velocity.x); //Always push right
+}
+if (ball.x >= width - ballRadius) {
+  ball.x = width - ballRadius;
+  velocity.x = -abs(velocity.x); //Always push left
+}
+
+if (ball.y <= ballRadius) {
+  ball.y = ballRadius;
+  velocity.y = abs(velocity.y); //Always bounce downward
+  
+}
+
      
      //left flipper
      push(); //so it won't effect us later
@@ -58,7 +79,7 @@ function draw() {
      }
      
      //ball collison
-     if (ball.y > 730) {
+     if (ballLaunched && ball.y > 730) {
   //Left flipper zone
   if (ball.x > 150 && ball.x < 230 && leftFlipperAngle === 0) {
     velocity.y = -abs(velocity.y);
@@ -70,5 +91,12 @@ function draw() {
     velocity.x -= 2;
   }
 }
+}
 
+function keyPressed() {
+    //this function will handle the spacebar (launch ball)
+    if (key == ' ' && !ballLaunched) {
+        ballLaunched = true;
+        velocity = createVector(2, -4); //will make the ball move
+    }
 }
