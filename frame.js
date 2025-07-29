@@ -51,7 +51,7 @@ if (ball.y <= ballRadius) {
      translate(150,750); //this will be the inital position of the flipper
      rotate(radians(leftFlipperAngle)); //uses the leftFlipperAngle global variable for the rotation.
      fill(200, 120, 50); //orange colour
-     rect(0,-10,80,20,10); //actually drawing the flipper
+     rect(0, -10, 120, 20, 10); //actually drawing the flipper
      pop(); //will restore everything back (in junction with push)
      
      //right flipper
@@ -60,7 +60,7 @@ if (ball.y <= ballRadius) {
      scale(-1,1); //fixes a bug in the flipper not being mirrored to the left one
      rotate(radians(rightFlipperAngle)); //same effect as left flipper for more detail
      fill(200, 120, 50); //orange colour
-     rect(0, -10, 80,20,10); //right flipper position
+     rect(0, -10, 120, 20, 10); //right flipper position
      pop(); //refer to previous message on pop
      
      
@@ -90,7 +90,29 @@ if (ball.y <= ballRadius) {
     velocity.y = -abs(velocity.y);
     velocity.x -= 2;
   }
+  
+  //Prevent ball from escaping through side blockers near bottom
+if (ball.x < 120 && ball.y > 750) {
+  ball.x = 120;
+  velocity.x = abs(velocity.x);
 }
+if (ball.x > width - 120 && ball.y > 750) {
+  ball.x = width - 120;
+  velocity.x = -abs(velocity.x);
+}
+
+}
+
+//blockers function
+//this makes it so the ball doesn't just fall off from the bottom, it has to fall from the flippers
+fill(120); //Gray colour
+noStroke();
+
+//Left blocker at bottom-left
+rect(0, 750, 120, 50);
+
+//Right blocker at bottom-right
+rect(width - 120, 750, 120, 50);
 }
 
 function keyPressed() {
