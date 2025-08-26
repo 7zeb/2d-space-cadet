@@ -8,6 +8,7 @@ let ballX;
 let ballY;
 let ballRadius = 20;
 let ballLaunched = false; //tells the game that the ball is not launched from the start of the game.
+let scoreValue = 0; //stores the value of the score to 0, it will increase once the ball hits a score target
 
 
 function setup() {
@@ -23,6 +24,7 @@ function draw() {
     fill(156, 151, 140); //set ball colour to a gray-ish
     ellipse(ball.x, ball.y, 20); //draws the ball
     //ball.x and ball.y are both variables
+    scoreBoard(); //calls our scoreboard function
     
     //The IF statement makes it so that the ball will only move if ballLaunched is set to true
     if (ballLaunched) {
@@ -42,6 +44,7 @@ if (ball.x >= width - ballRadius) {
 if (ball.y <= ballRadius) {
   ball.y = ballRadius;
   velocity.y = abs(velocity.y); //Always bounce downward
+  
   
 }
 
@@ -114,6 +117,13 @@ rect(0, 750, 120, 50);
 //Right blocker at bottom-right
 rect(width - 120, 750, 120, 50);
 }
+
+function scoreBoard() {
+    //this function shows the scoreboard so you can see it on the top of the screen
+    fill(242, 168, 56); //a orangish color for the scoreboard
+    rect(180,50,250,140); //the scoreboard
+}
+
 
 function keyPressed() {
     //this function will handle the spacebar (launch ball)
